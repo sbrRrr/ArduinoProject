@@ -35,7 +35,6 @@ def connect_to_db():
 
 # Función para insertar los valores de distancia y velocidad en la base de datos
 def insert_into_db(distance, speed):
-    cursor=0
     try:
         # Conectar a la base de datos
         cnx = connect_to_db()
@@ -56,8 +55,9 @@ def insert_into_db(distance, speed):
     except mysql.connector.Error as err:
         print(f"Error al insertar datos en la base de datos: {err}")
     finally:
-        cursor.close()
-        cnx.close()
+        if cnx is not None and cnx.is_connected():
+            cursor.close()  # Asegúrate de cerrar el cursor antes de la conexión
+            cnx.close()  # Asegúrate de cerrar la conexión
 
 # Callback cuando el cliente se conecta al broker MQTT
 def on_connect(client, userdata, flags, rc):
@@ -119,3 +119,5 @@ try:
 except KeyboardInterrupt:
     # Permitir salir limpiamente con Ctrl+C
     signal_handler(None, None)
+
+
