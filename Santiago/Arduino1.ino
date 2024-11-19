@@ -9,7 +9,7 @@ const char* ssid = "Nombre_red";
 const char* password = "Contraseña_de_red";
 
 // Configura tu servidor MQTT
-const char* mqtt_server = "192.168.232.115"; // Dirección del broker MQTT
+const char* mqtt_server = "Direccion.Broker.MQTT"; // Dirección del broker MQTT
 const int mqtt_port = 1883; // Puerto MQTT
 
 WiFiClient espClient;
